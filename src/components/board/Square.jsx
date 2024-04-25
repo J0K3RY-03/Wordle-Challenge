@@ -8,8 +8,8 @@ const Square = () => {
     const [wordForWin, setWordForWin] = useState('');
 
     useEffect(() => {
-        setWordForWin(word);
-        const tableOfLetters = word.split('');
+        setWordForWin(word.toUpperCase());
+        const tableOfLetters = word.toUpperCase().split('');
         setLetters(tableOfLetters);
     }, [word]);
 
