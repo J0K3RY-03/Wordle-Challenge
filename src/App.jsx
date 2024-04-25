@@ -1,7 +1,11 @@
+import Board from "./components/board/Board.jsx";
+
 function App() {
 
   return (
-      <h1 className={'bg-black text-amber-800'}>HELLO</h1>
+      <main className={'flex flex-col justify-center items-center py-8'}>
+       <Board/>
+      </main>
   )
 }
 
