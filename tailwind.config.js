@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './src/components/**/*.{jsx,js}',
+    './src/components/**/*.jsx',
     './src/App.jsx',
+    './src/main.jsx',
     './vite.config.{js,ts}',
   ],
   theme: {
