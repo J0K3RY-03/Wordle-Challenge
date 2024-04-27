@@ -1,9 +1,28 @@
-const Key = ({letter, keyId}) => {
+import {useContext} from "react";
+import {AppContext} from "../../App.jsx";
+
+const Key = ({letter}) => {
+    const {guessTheWord, pressEnter, backspace} = useContext(AppContext);
+console.log(letter, 'how letter')
+    const handleClickEnter = () => {
+        if (letter === '↵'){
+            pressEnter()
+        } else if (letter === '←') {
+            backspace()
+        }
+    }
+
     return (
-        <div className={'flex items-center justify-center border rounded-md p-4 mr-1' +
+        <button onClick={() => {
+            guessTheWord(letter)
+            handleClickEnter()
+        }} className={'flex items-center' +
+            ' justify-center border' +
+            ' rounded-md' +
+            ' p-4 mr-1' +
             ' w-[45px] h-[45px] text-1xl'}>
             {letter}
-        </div>
+        </button>
     )
 }
 
