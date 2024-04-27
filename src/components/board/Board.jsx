@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import BoardContent from './BoardContent.jsx'
+import Grid from './Grid.jsx';
 
 const Board = () => {
     return (
         <div className={'board'}>
-            <BoardContent/>
+            <Grid/>
         </div>
     )
 }

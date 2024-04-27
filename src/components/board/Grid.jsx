@@ -5,7 +5,7 @@ const Grid = () => {
     return (
         <div className={'rowss'}>
             {column.map((row, index) => (
-                <Rows key={index} rowId={index} id={index}/>
+                <Rows key={index} id={index}/>
             ))}
         </div>
     )

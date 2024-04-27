@@ -1,37 +1,43 @@
+import {AppContext} from "../../App.jsx";
 import {useContext, useEffect, useState} from "react";
-import {WordContext} from "./BoardContent.jsx";
-import {WORDS} from '../../data/words.js'
 
-const Square = () => {
-    const word = useContext(WordContext)
-    const [letter , setLetters] = useState([]);
-    const [wordForWin, setWordForWin] = useState('');
+const Square = ({rowId, indexId}) => {
+    const [letter, setLetter] = useState('')
+    const {guessWord , word , currentRow , completedRows} = useContext(AppContext);
+    const [completed , setCompleted] = useState(true)
+    const [colors, setColors] = useState({bg: 'bg-blue', color:'white'});
+    const changeColors = () => {
+        const arrayOfWord = word.split('');
+        if (arrayOfWord.includes(letter)){
+            if (arrayOfWord[indexId] === letter){
+               return setColors({bg:'green' , color:'black'});
+            }
+            return setColors({bg:'orange', color:'black'})
+        }
+        return setColors({bg:"red" , color:"black"})
+    }
 
     useEffect(() => {
-        setWordForWin(word.toUpperCase());
-        const tableOfLetters = word.toUpperCase().split('');
-        setLetters(tableOfLetters);
-    }, [word]);
+        if (currentRow === rowId) {
+            setLetter(guessWord[indexId]);
+        }
+
+        if(completedRows.includes(rowId) && completed){
+            changeColors()
+            setCompleted(false)
+        }
+    }, [changeColors, completed, completedRows, currentRow, guessWord, indexId, rowId]);
+
+    const style ={
+        backgroundColor: colors.bg,
+        color: colors.color
+    }
 
     return (
-        <div className="flex">
-            {letter.map((letter, index) => (
-                <SquareContent key={index} letter={letter}/>
-            ))}
+        <div style={style} className="flex justify-center items-center border border-white-100 w-[50px] h-[50px]">
+            <p>{letter}</p>
         </div>
     );
-}
-
-const SquareContent = ({letter}) => {
-    console.log(letter)
-    return (
-        <div
-            className={'flex justify-center items-center border' +
-                ' rounded-md p-4 mr-1 w-[60px] h-[60px] text-2xl'}
-        >
-            {letter}
-        </div>
-    )
 }
 
 export default Square;
